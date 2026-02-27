@@ -40,12 +40,10 @@ const ContactSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Симуляция отправки
     await new Promise((resolve) => setTimeout(resolve, 2000));
     console.log("Форма отправлена:", formData);
     setIsSubmitting(false);
     setIsSubmitted(true);
-    // Сброс формы через 3 секунды
     setTimeout(() => {
       setIsSubmitted(false);
       setFormData({ name: "", email: "", message: "" });
@@ -64,7 +62,10 @@ const ContactSection = () => {
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
         }`}
       >
-        <h2 className="text-5xl font-bold mb-10 text-center text-zinc-200">Связаться со мной</h2>
+        <h2 className="text-5xl font-bold mb-4 text-center text-zinc-200">Оставить заявку</h2>
+        <p className="text-center text-zinc-400 mb-10 text-lg">
+          Расскажите, какой уровень катания и мы подберём идеальную доску
+        </p>
         <div
           className={`max-w-md mx-auto bg-black/50 backdrop-blur-lg rounded-lg p-8 shadow-2xl border border-white/10 transition-all duration-500 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
@@ -96,7 +97,7 @@ const ContactSection = () => {
             <div className="mb-4">
               <Textarea
                 name="message"
-                placeholder="Ваше сообщение"
+                placeholder="Расскажите о вашем уровне катания и пожеланиях к доске"
                 value={formData.message}
                 onChange={handleChange}
                 required
@@ -117,12 +118,12 @@ const ContactSection = () => {
                 ) : isSubmitted ? (
                   <>
                     <CheckCircle className="mr-2" size={18} />
-                    Отправлено!
+                    Заявка принята!
                   </>
                 ) : (
                   <>
                     <Send className="mr-2" size={18} />
-                    Отправить сообщение
+                    Отправить заявку
                   </>
                 )}
               </span>

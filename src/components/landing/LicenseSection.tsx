@@ -1,71 +1,70 @@
 import { useState, useRef, useEffect } from "react";
-import { Check, X, Crown, Zap, Star, Globe } from "lucide-react";
+import { Check, Crown, Zap, Star, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-interface LicenseOption {
+interface BoardOption {
   name: string;
   price: string;
   icon: React.ReactNode;
   features: string[];
-  notIncluded?: string[];
   bulkDeal?: string;
   popular?: boolean;
 }
 
-const licenseOptions: LicenseOption[] = [
+const boardOptions: BoardOption[] = [
   {
-    name: "Стандартная лицензия",
-    price: "299 руб",
+    name: "Начинающий",
+    price: "от 15 000 ₽",
     icon: <Star className="w-6 h-6" />,
     features: [
-      "Использование для записи музыки",
-      "Распространение до 5 000 копий",
-      "75 000 онлайн-прослушиваний",
-      "1 музыкальный клип",
-      "Коммерческие выступления",
-      "Радиотрансляция (2 станции)",
+      "Мягкая flex-жёсткость",
+      "Длина 140–150 см",
+      "Идеально для склонов-трасс",
+      "Устойчивость и лёгкое управление",
+      "Подходит для обучения",
+      "Гарантия 1 год",
     ],
-    bulkDeal: "КУПИ 1 ТРЕК — ПОЛУЧИ 1 В ПОДАРОК!",
+    bulkDeal: "ДОСКА + КРЕПЛЕНИЯ — СКИДКА 10%!",
   },
   {
-    name: "Продвинутая лицензия",
-    price: "499 руб",
+    name: "Любитель",
+    price: "от 25 000 ₽",
     icon: <Zap className="w-6 h-6" />,
     features: [
-      "Использование для записи музыки",
-      "Распространение до 10 000 копий",
-      "150 000 онлайн-прослушиваний",
-      "1 музыкальный клип",
-      "Коммерческие выступления",
-      "Радиотрансляция (без ограничений)",
+      "Средняя flex-жёсткость",
+      "Длина 150–158 см",
+      "Парк и подготовленные трассы",
+      "Двунаправленная форма twin-tip",
+      "Отзывчивый отклик",
+      "Гарантия 2 года",
     ],
     popular: true,
   },
   {
-    name: "Премиум лицензия",
-    price: "799 руб",
+    name: "Продвинутый",
+    price: "от 40 000 ₽",
     icon: <Crown className="w-6 h-6" />,
     features: [
-      "Использование для записи музыки",
-      "Распространение до 20 000 копий",
-      "500 000 онлайн-прослушиваний",
-      "1 музыкальный клип",
-      "Только некоммерческие выступления",
+      "Жёсткая flex-жёсткость",
+      "Длина 155–163 см",
+      "Фрирайд и глубокий снег",
+      "Направленная форма directional",
+      "Карбоновые вставки",
+      "Гарантия 2 года",
     ],
-    notIncluded: ["Без прав на радиотрансляцию"],
   },
   {
-    name: "Коммерческая лицензия",
-    price: "899 руб",
+    name: "Про",
+    price: "от 65 000 ₽",
     icon: <Globe className="w-6 h-6" />,
     features: [
-      "Использование для записи музыки",
-      "Неограниченное распространение",
-      "Неограниченные онлайн-прослушивания",
-      "Неограниченное количество клипов",
-      "Коммерческие выступления",
-      "Радиотрансляция (без ограничений)",
+      "Профессиональная жёсткость",
+      "Индивидуальный подбор длины",
+      "Любой тип катания",
+      "Топовые материалы и конструкция",
+      "Консультация с экспертом",
+      "Гарантия 3 года",
     ],
   },
 ];
@@ -93,7 +92,7 @@ const LicenseSection = () => {
   }, []);
 
   return (
-    <section ref={ref} id="licenses" className="py-20 relative overflow-hidden">
+    <section ref={ref} id="catalog" className="py-20 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-black via-zinc-900/20 to-black"></div>
 
       <div className="container mx-auto px-4 relative">
@@ -102,15 +101,14 @@ const LicenseSection = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
           }`}
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white">Выбери свою лицензию</h2>
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white">Выбери свою доску</h2>
           <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
-            Подбери идеальную лицензию под свои потребности и начни создавать потрясающую музыку уже
-            сегодня
+            От первого спуска до профессионального фрирайда — у нас есть сноуборд для каждого уровня
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {licenseOptions.map((option, index) => (
+          {boardOptions.map((option, index) => (
             <div
               key={option.name}
               className={`transition-all duration-500 ${
@@ -132,7 +130,7 @@ const LicenseSection = () => {
                 {option.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
                     <span className="bg-white text-black px-4 py-1 rounded-full text-sm font-semibold animate-pulse">
-                      Популярный
+                      Хит продаж
                     </span>
                   </div>
                 )}
@@ -154,12 +152,6 @@ const LicenseSection = () => {
                           <span className="text-sm text-zinc-300">{feature}</span>
                         </li>
                       ))}
-                      {option.notIncluded?.map((feature, i) => (
-                        <li key={i} className="flex items-start text-zinc-500">
-                          <X className="h-5 w-5 text-zinc-500 mr-2 shrink-0 mt-0.5" />
-                          <span className="text-sm">{feature}</span>
-                        </li>
-                      ))}
                     </ul>
                   </div>
 
@@ -175,8 +167,8 @@ const LicenseSection = () => {
                     className="w-full bg-white text-black hover:bg-zinc-200 transition-colors"
                     asChild
                   >
-                    <a href="#" target="_blank" rel="noopener noreferrer">
-                      Выбрать
+                    <a href="#contact">
+                      Заказать
                     </a>
                   </Button>
                 </CardContent>
